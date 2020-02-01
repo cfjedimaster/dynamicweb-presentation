@@ -1,0 +1,25 @@
+Begin with my introduction to the web, how I quickly moved to backend
+Discovered random tarot card thing
+Apache SSI
+	https://httpd.apache.org/docs/current/howto/ssi.html
+
+Perl CGI scripts
+	image counters
+	http://www.scriptarchive.com/
+
+ColdFusion
+Move back to the client
+serverless
+
+
+
+MISC:
+https://web.archive.org/web/19981205042016/http://www.deathclock.com/morpheus/index.cfm
+CGI Perl book, 2012, http://shop.oreilly.com/product/9781565924192.do
+book has to explain URLs, web servers, form tags
+https://www.google.com/books/edition/CGI_Programming_with_Perl/gGNQ-O1WWQAC?hl=en&gbpv=1&printsec=frontcover
+parsing form data
+
+good ugly cgi - https://users.cs.cf.ac.uk/Dave.Marshall/PERL/node196.html
+form parsing - https://www.tutorialspoint.com/perl/perl_cgi_programming.htm
+
