@@ -92,12 +92,153 @@
           <img src="img/mosaic.webp">
         </section>
 
-        <!--
-        next - i started building lots of pages, 
-        ugly pages, show What the Thunder said,
-        first 'noticed' dynamic pages w/ tarot
-        -->
+        <section>
+        <h2>I'm a Web Master!</h2>
+        <ul>
+        <li class="fragment">Built sites</li>
+        <li class="fragment">Used Notepad</li>
+        <li class="fragment">Wrote horrible HTML</li>
+        </ul>
+        </section>
 
+        <section>
+          <pre><code data-trim>
+&lt;TABLE CELLPADDING=5 WIDTH=400 BORDER=0&gt;
+
+&lt;TR VALIGN=&quot;top&quot;&gt;
+&lt;TD&gt;&lt;FONT FACE=&quot;Arial&quot; SIZE=-1&gt;&lt;CODE&gt;&lt;B&gt;September 26, 1888&lt;/B&gt;&lt;/CODE&gt;&lt;/FONT&gt;&lt;/TD&gt;
+&lt;TD&gt;&lt;FONT FACE=&quot;Arial&quot; SIZE=-1&gt;T(homas) S(tearns) Eliot is born in Saint Louis, Missouri.&lt;/FONT&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR VALIGN=&quot;top&quot;&gt;
+&lt;TD&gt;
+&lt;FONT FACE=&quot;Arial&quot; SIZE=-1&gt;&lt;CODE&gt;&lt;B&gt;1906-1909&lt;/B&gt;&lt;/CODE&gt;&lt;/FONT&gt;&lt;/TD&gt;
+&lt;TD&gt;&lt;FONT FACE=&quot;Arial&quot; SIZE=-1&gt;Undergraduate at Harvard. Discovery of the symbolists and Laforgue.&lt;/FONT&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="img/thunder.png">
+        </section>
+
+        <section>
+          <h1>Dynamic?</h1>
+          <aside class="notes">
+            started building sites, all static, and I knew there was more to what 
+            I wanted to do, more flexability, etc.
+          </aside>
+        </section>
+
+        <section data-ray id="tarot">
+          <aside class="notes"> 
+            talk about how i found this random tarot thing
+            it really got my attention and as i said, i don't 
+            design well, it wasnt fun to design, FE dev in general wasn't fun, 
+            retreating to the server side and focusing on dynamic web stuff was fun!
+          </aside>
+        </section>
+
+        <section data-background="img/kitten1.jpg" data-background-opacity="0.2">
+          <h1>Starting Simple</h1>
+        </section>
+
+        <section>
+        <h2>Apache SSI</h2>
+        <ul>
+          <li class="fragment">Server Side Includes</li>
+          <li class="fragment">Directives in HTML to do stuff</li>
+          <li class="fragment">Had to be enabled</li>
+          <li class="fragment">Usually with custom extension, .shtml</li>
+        </ul>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+<!--#include virtual="/footer.html" -->
+          </pre></code>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+<!--#config timefmt="%D" -->
+This file last modified <!--#echo var="LAST_MODIFIED" -->
+      </pre></code>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+
+<!--#exec cmd="dir" -->
+      </pre></code>
+        </section>
+
+        <section>
+          <blockquote>
+            "Note that this feature is exceedingly dangerous"
+          </blockquote>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+
+<!--#set var="name" value="Rich" -->
+<!--#set var="modified" value="$LAST_MODIFIED" -->
+
+My name is <!--#echo var="name" --> and I was 
+modified <!--#echo var="modified" -->
+        </pre></code>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+
+<p>
+Good <!--#if expr="%{TIME_HOUR} <12" -->
+morning!
+<!--#else -->
+afternoon!
+<!--#endif -->
+</p>
+        </pre></code>
+        </section>
+        
+        <section>
+        <h2>Learn More</h2>
+        <ul>
+        <li class="fragment"><a href="https://httpd.apache.org/docs/current/howto/ssi.html" target="_new">https://httpd.apache.org/docs/current/howto/ssi.html</a></li>
+        <li class="fragment"><a href="https://en.wikipedia.org/wiki/Server_Side_Includes" target="_new">https://en.wikipedia.org/wiki/Server_Side_Includes</a></li>
+        <li class="fragment">Also - just don't.</li>
+        </ul>
+        </section>
+
+        <!--
+          move into Perl CGI
+          move into ColdFusion/PHP
+          the client-side stopped sucking
+          there's still stuff server only, bypass CORs, security, API management, etc
+          JAMStack
+        -->
+        
         <section>
         <h2>Assets</h2>
         <p>
@@ -136,6 +277,30 @@
           { src: 'plugin/highlight/highlight.js', async: true }
         ]
       });
+
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        let result = Math.floor(Math.random() * (max - min + 1)) + min;
+        if(result < 10) result = '0' + result;
+        return result;
+      }
+
+      Reveal.addEventListener( 'slidechanged', e => {
+        if(event.currentSlide.id === 'tarot') {
+          console.log('tarot');
+          let first = getRandomInt(0, 21);
+          let second = getRandomInt(0, 21); 
+          let third = getRandomInt(0, 21);
+          let s = `
+          <img src="img/ar${first}.jpg">
+          <img src="img/ar${second}.jpg">
+          <img src="img/ar${third}.jpg">
+          `; 
+          event.currentSlide.innerHTML = s;
+        }
+      });
+
     </script>
   </body>
 </html>
