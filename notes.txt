@@ -23,3 +23,5 @@ parsing form data
 good ugly cgi - https://users.cs.cf.ac.uk/Dave.Marshall/PERL/node196.html
 form parsing - https://www.tutorialspoint.com/perl/perl_cgi_programming.htm
 
+history of Perl - https://thehistoryoftheweb.com/imdb-and-internet-underground-music-archive/
+
