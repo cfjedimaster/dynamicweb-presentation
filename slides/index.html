@@ -395,6 +395,85 @@ print &quot;&lt;/html&gt;&quot;;
           <h1>App Server FTW!</h1>
         </section>
 
+        <section>
+        <h2>App Servers</h2>
+        <ul>
+        <li class="fragment">A companion to your web server</li>
+        <li class="fragment">Better performance/more power/etc than CGI</li>
+        <li class="fragment">Database-driven sites</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2>App Servers 101</h2>
+        <ul>
+          <li class="fragment">Install web server</li>
+          <li class="fragment">Install app server</li>
+          <li class="fragment">Configure web server (if needed)</li>
+          <li class="fragment">Install database "server"</li>
+          <li class="fragment">Write *.foo files</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2>App Servers</h2>
+        <ul>
+        <li class="fragment">ColdFusion (1995)</li>
+        <li class="fragment">PHP (1994)</li>
+        <li class="fragment">ASP (1996)</li>
+        <li class="fragment">Many more</li>
+        </ul>
+        </section>
+
+        <section>
+        <img src="img/cf.jpg">
+        </section>
+
+        <section>
+          <h2>WTF ColdFusion?</h2>
+          <li class="fragment">Practical</li>
+          <li class="fragment">Tag-based</li>
+          <li class="fragment">Easy to write (and use the result of) SQL</li>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+&lt;cfquery name=&quot;cats&quot; datasource=&quot;mycats&quot;&gt;
+select name, age, breed
+from cats
+&lt;/cfquery&gt;
+
+&lt;h2&gt;Cats&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Age&lt;/td&gt;&lt;td&gt;Breed&lt;/td&gt;&lt;/tr&gt;
+  &lt;cfoutput query=&quot;cats&quot;&gt;
+    &lt;tr&gt;
+      &lt;td&gt;#name#&lt;/td&gt;
+      &lt;td&gt;#age#&lt;/td&gt;
+      &lt;td&gt;#breed#&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/cfoutput&gt;
+&lt;/table&gt;
+        </code></pre>
+      </section>
+
+      <section>
+          <pre><code data-trim>
+<!--- imagine a form POSTed here  --->
+&lt;cfmail to=&quot;foo@foo.com&quot; from=&quot;#form.email&quot; subject=&quot;Contact Form&quot;&gt;
+Name:   #form.name#
+Email:  #form.email#
+
+Comments:
+#form.comments#
+&lt;/cfmail&gt;
+
+&lt;cfoutput&gt;
+Thank you, #form.name#, for your comments.
+&lt;/cfoutput&gt;
+          </code></pre>
+      </section>
+
         <!--
           move into ColdFusion/PHP
           the client-side stopped sucking
