@@ -185,23 +185,6 @@ This file last modified <!--#echo var="LAST_MODIFIED" -->
   Blabity blabity blah
 </p>
 
-<!--#exec cmd="dir" -->
-      </pre></code>
-        </section>
-
-        <section>
-          <blockquote>
-            "Note that this feature is exceedingly dangerous"
-          </blockquote>
-        </section>
-
-        <section>
-          <pre><code data-trim>
-<h1>Our Site</h1>
-<p>
-  Blabity blabity blah
-</p>
-
 <!--#set var="name" value="Rich" -->
 <!--#set var="modified" value="$LAST_MODIFIED" -->
 
@@ -226,7 +209,31 @@ afternoon!
 </p>
         </pre></code>
         </section>
-        
+
+        <section>
+          <blockquote>
+          <p>"Hold my beer..."</p>
+          </blockquote>
+        </section>
+
+        <section>
+          <pre><code data-trim>
+<h1>Our Site</h1>
+<p>
+  Blabity blabity blah
+</p>
+
+<!--#exec cmd="dir" -->
+      </pre></code>
+        </section>
+
+        <section>
+          <blockquote>
+            "Note that this feature is exceedingly dangerous"
+          </blockquote>
+        </section>
+
+
         <section>
         <h2>Learn More</h2>
         <ul>
@@ -304,8 +311,10 @@ print("Hello ".$name.". You are ".$age." years old.\n");
           <img src="img/counter.jpg">
         </section>
 
-        <section>
+        <section data-background="img/tenor.gif">
+          <!--
           <img src="img/tenor.gif">
+          -->
         </section>
 
         <section>
@@ -392,7 +401,7 @@ print &quot;&lt;/html&gt;&quot;;
         <h2>Learn More</h2>
         <ul>
         <li class="fragment"><a href="https://www.perl.org/" target="_new">https://www.perl.org/</a></li>
-        <li class="fragment"><a href="https://thehistoryoftheweb.com/imdb-and-internet-underground-music-archive/" target="_new">https://thehistoryoftheweb.com/imdb-and-internet-underground-music-archive/</a></li>
+        <li class="fragment"><a href="https://thehistoryoftheweb.com/imdb-and-internet-underground-music-archive/" target="_new">The Linguist and the Programmer (Jay's in the room!)</a></li>
         </ul>
         </section>
 
@@ -623,7 +632,7 @@ Thank you, #form.name#, for your comments.
       </section>
 
       <section>
-        <h2>Severless</h2>
+        <h2>Serverless</h2>
         <ul>
           <li class="fragment">Everyone loves the name</li>
           <li class="fragment">Everyone agrees on exactly what it is</li>
@@ -634,11 +643,92 @@ Thank you, #form.name#, for your comments.
         <img src="img/tweet.png">
       </section>
 
-        <!--
-        bit more about serverless, wrapup
+      <section>
+        <h2>Serverless</h2>
+        <ul>
+          <li class="fragment">Any time I don't have to install crap</li>
+          <li class="fragment">Any time I don't have to monitor crap (kinda)</li>
+          <li class="fragment">FaaS (Function as a Service)</li>
+        </ul>
+      </section>
 
-        -->
-        
+      <section>
+        <img src="img/cb.png">
+        <p>https://codabreaker.rocks</p>
+      </section>
+
+      <section>
+        <pre><code data-class="javascript" data-trim data-line-numbers="7,17-23,31">
+const axios = require('axios'); var crypto = require('crypto');
+
+const apiRoot = 'https://us6.api.mailchimp.com/3.0/lists/d00ad8719a/members/';
+
+exports.handler = async (event, context) => {
+  try {
+    const email = event.queryStringParameters.email;
+    if(!email) {
+      return { 
+        statusCode: 500, 
+        body: 'email query paramter required' 
+      };
+    }
+
+    let emailhash = crypto.createHash('md5').update(email).digest("hex");
+
+    return axios({
+      method: 'put',
+      url: apiRoot + emailhash,
+      data:{
+        email_address:email,
+        status:'subscribed'
+      },
+      auth: {
+        'username': 'anythingreally',
+        'password': process.env.MC_API
+      }
+    }).then(res => {
+      return {
+        statusCode:200, 
+        body: JSON.stringify(res.data)
+      }
+    })
+    .catch(err => {
+      console.log('returning from here', err.response.data.detail);
+      return { statusCode: 500, body: JSON.stringify(err.response.data) };
+    });
+
+  } catch (err) {
+    return { statusCode: 500, body: err.toString() };
+  }
+
+};
+        </code></pre>
+      </section>
+
+      <section>
+        <h1>Why is that cool?</h1>
+      </section>
+
+      <section>
+        <h2>It's cool because...</h2>
+        <ul>
+          <li class="fragment">I didn't setup Node</li>
+          <li class="fragment">I didn't use Express</li>
+          <li class="fragment">Runs when it needs to</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>My Stack (JAMStack)</h2>
+        <ul>
+          <li class="fragment">I pick a SSG (Eleventy)</li>
+          <li class="fragment">Write HTML, CSS, JS</li>
+          <li class="fragment">Deploy to Netlify (or Zeit)</li>
+          <li class="fragment">Use serverless for the parts I need a server for</li>
+        </ul>
+
+      </section>
+
         <section>
         <h2>Assets</h2>
         <p>
